@@ -14,7 +14,7 @@ vslider bounds(266, 12, 50, 150), channel("dist"), range(0, 1, 0, 1, 0.001) text
 vslider bounds(206, 12, 50, 150), channel("rate"), range(0, 1, 0, 1, 0.001) text("Rate")
 vslider bounds(322, 10, 50, 150), channel("oct"), range(0, 1, 0, 1, 0.001) text("Oct")
 rslider bounds(144, 208, 60, 60), channel("gain"), range(0, 5.0, 0, 1, 0.01) text("Volume")
-rslider bounds(20, 208, 60, 60), channel("gGain"), range(0, 5.0, 0, 1, 1.0) text("Clean Volume")
+;rslider bounds(20, 208, 60, 60), channel("gGain"), range(0, 5.0, 0, 1, 1.0) text("Clean Volume")
 
 </Cabbage>
 <CsoundSynthesizer>
@@ -22,6 +22,8 @@ rslider bounds(20, 208, 60, 60), channel("gGain"), range(0, 5.0, 0, 1, 1.0) text
 -n -d -+rtmidi=NULL -M0 -m0d 
 </CsOptions>
 <CsInstruments>
+
+
 ; Initialize the global variables. 
 ksmps = 32
 nchnls = 2
@@ -85,10 +87,10 @@ gifn	ftgen	0,0, 257, 9, .5,1,270
 
 
 
-;a1 inch 1
+a1 inch 1
 ;a2 inch 2
 
-a1 diskin2 "OLBass.wav", 1,0,1
+;a1 diskin2 "OLBass.wav", 1,0,1
 
 ;aFilter moogladder2 a1, kFreq, 0.7
 
