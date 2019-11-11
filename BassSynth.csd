@@ -14,6 +14,7 @@ vslider bounds(266, 12, 50, 150), channel("dist"), range(0, 1, 0, 1, 0.001) text
 vslider bounds(206, 12, 50, 150), channel("rate"), range(0, 1, 0, 1, 0.001) text("Rate")
 vslider bounds(322, 10, 50, 150), channel("oct"), range(0, 1, 0, 1, 0.001) text("Oct")
 rslider bounds(144, 208, 60, 60), channel("gain"), range(0, 5.0, 0, 1, 1.0) text("Volume")
+rslider bounds(20, 208, 60, 60), channel("gGain"), range(0, 5.0, 0, 1, 1.0) text("Clean Volume")
 
 </Cabbage>
 <CsoundSynthesizer>
@@ -50,6 +51,7 @@ kRate chnget "rate"
 kOct chnget "oct"
 kDist chnget "dist"
 kVol chnget "gain"
+kVol2 chnget "gGain"
 ksens = 0.5
 katt = kRate
 krel = 0.3
@@ -79,7 +81,7 @@ aout EnvelopeFollower a1,ksens,katt,krel,kEfreq,kres*0.95
 
 ;aFilter = (aFilter*aout)
 
-asig = (aout+aFilter+aDist*0.3)
+asig = (aout+aFilter+aDist*0.3+kVol2)
 
 
 
