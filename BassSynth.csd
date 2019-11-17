@@ -88,10 +88,10 @@ gifn	ftgen	0,0, 257, 9, .5,1,270
 
 ;- Region: Input Section
 
-;a1 inch 1
-;a2 inch 2
+a1 inch 1
+a2 inch 2
 
-a1 diskin2 "OLBass.wav", 1,0,1
+;a1 diskin2 "OLBass.wav", 1,0,1
 
 ;aFilter moogladder2 a1, kFreq, 0.7
 
