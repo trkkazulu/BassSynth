@@ -12,7 +12,7 @@ vslider bounds(86, 12, 50, 150), channel("efreq"), range(40.00, 10000.00, 40, 1,
 vslider bounds(146, 12, 50, 150), channel("res"), range(0, 1, 0, 1, 0.001) text("Res")
 vslider bounds(266, 12, 50, 150), channel("dist"), range(0, 1, 0, 1, 0.001) text("Dist")
 vslider bounds(206, 12, 50, 150), channel("rate"), range(0, 1, 0, 1, 0.001) text("Rate")
-vslider bounds(322, 10, 50, 150), channel("oct"), range(0, 1, 0, 1, 0.001) text("Oct")
+vslider bounds(322, 10, 50, 150), channel("oct"), range(0, 15, 0, 1, 0.001) text("Oct")
 rslider bounds(144, 208, 60, 60), channel("gain"), range(0, 5.0, 0, 1, 0.01) text("Volume")
 rslider bounds(20, 208, 60, 60), channel("gGain"), range(0, 5.0, 0, 1, 1.0) text("Clean Volume")
 
@@ -111,7 +111,9 @@ aout EnvelopeFollower a1,ksens,katt,krel,kEfreq,kres*0.95
 
 aout = aout*kVol
 
-aOct OctaveDivider a1, 1.0, 90.00, 90.00
+aOct OctaveDivider a1, 2, 120.00, 90.00
+
+aOct compress aOct, aOct, -6, 48, 60, 2, .01, .05, .02
 
 aOct = aOct*kOct
 
