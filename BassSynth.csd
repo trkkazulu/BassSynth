@@ -5,7 +5,7 @@
 
 
 <Cabbage>
-form caption("BassSynth") size(400, 300), colour(58, 110, 182), pluginid("def1")
+form caption("BassSynth") size(600, 300), colour(58, 110, 182), pluginid("bsnt")
 
 vslider bounds(26, 12, 50, 150), channel("sfreq"), range(40.00, 800.00, 0.0, 1, 1.0) text("StartFreq")
 vslider bounds(86, 12, 50, 150), channel("efreq"), range(40.00, 10000.00, 40, 1, 1.0) text("EndFreq")
@@ -13,7 +13,8 @@ vslider bounds(146, 12, 50, 150), channel("res"), range(0, 1, 0, 1, 0.001) text(
 vslider bounds(266, 12, 50, 150), channel("dist"), range(0, 1, 0, 1, 0.001) text("Dist")
 vslider bounds(206, 12, 50, 150), channel("rate"), range(0, 1, 0, 1, 0.001) text("Rate")
 vslider bounds(322, 10, 50, 150), channel("oct"), range(0, 15, 0, 1, 0.001) text("Oct")
-rslider bounds(144, 208, 60, 60), channel("gain"), range(0, 5.0, 0, 1, 0.01) text("Volume")
+vslider bounds(382, 10, 50, 150), channel("gain"), range(0, 1, 0, 1, 0.001) text("Guitar")
+;rslider bounds(144, 208, 60, 60), channel("gain"), range(0, 5.0, 0, 1, 0.01) text("Volume")
 rslider bounds(20, 208, 60, 60), channel("gGain"), range(0, 5.0, 0, 1, 1.0) text("Clean Volume")
 
 </Cabbage>
@@ -96,30 +97,32 @@ a1 diskin2 "OLBass.wav", 1,0,1
 
 aDist distort a1, kDist, gifn
 
+aDist lpf18 aDist, 600, .5, 0
+
 kLine linseg 0.0, 0.02, 1.0
 
 aFilter moogladder2 a1, kFreq, kRate
 ;kEnv adsr 0.4, 0.6, 0.5, 0.3
 
-aDist = aDist*kVol
+aDist = aDist*kDist
 
 aFilter = aFilter*kVol
 
-aClean = aFilter*kVol2/2
+aClean = a1*kVol2
 
 aout EnvelopeFollower a1,ksens,katt,krel,kEfreq,kres*0.95
 
 aout = aout*kVol
 
-aOct OctaveDivider a1, 2, 120.00, 90.00
+aOct OctaveDivider a1, 2, 220.00, 80.00
 
-aOct compress aOct, aOct, -6, 48, 60, 2, .01, .05, .02
+aOct compress aOct, aOct, -6, 48, 60, 2, .02, .5, .02
 
 aOct = aOct*kOct
 
 ;aFilter = (aFilter*aout)
 
-asig = (aOct+aFilter+aout)
+asig = (aOct+aFilter+aout+aDist+aClean)
 
 
 
