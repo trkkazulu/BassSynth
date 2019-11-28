@@ -106,7 +106,7 @@ aDist lpf18 aDist, 800, .5, .2
 
 kLine linseg 0.0, 0.02, 1.0
 
-aFilter moogladder2 a1, kFreq, kRate
+aFilter moogladder2 a1, kFreq, kRes
 
 aFilter = aFilter*kVol
 
