@@ -13,9 +13,9 @@ vslider bounds(146, 12, 50, 150), channel("res"), range(0, 1, 0, 1, 0.001) text(
 vslider bounds(266, 12, 50, 150), channel("dist"), range(0, 1, 0, 1, 0.001) text("Dist")
 vslider bounds(206, 12, 50, 150), channel("rate"), range(0, 1, 0, 1, 0.001) text("Rate")
 vslider bounds(322, 10, 50, 150), channel("oct"), range(0, 15, 0, 1, 0.001) text("Oct")
-vslider bounds(382, 10, 50, 150), channel("gain"), range(0, 1, 0, 1, 0.001) text("Guitar")
-;rslider bounds(144, 208, 60, 60), channel("gain"), range(0, 5.0, 0, 1, 0.01) text("Volume")
-rslider bounds(20, 208, 60, 60), channel("gGain"), range(0, 5.0, 0, 1, 1.0) text("Clean Volume")
+vslider bounds(446, 10, 50, 150), channel("gain"), range(0, 1, 0, 1, 0.001) text("Synth")
+vslider bounds(526, 10, 50, 150), channel("gGain"), range(0, 1, 0, 1, 0.001) text("Guitar")
+
 
 </Cabbage>
 <CsoundSynthesizer>
@@ -28,6 +28,7 @@ ksmps = 32
 nchnls = 2
 0dbfs = 1
 
+;- Region: UDOs
 opcode	OctaveDivider,a,akkk
 	ain,kdivider,kInputFilt,kToneFilt	xin
 	krms	rms		ain
@@ -84,12 +85,13 @@ gifn	ftgen	0,0, 257, 9, .5,1,270
 
 
 
-
-
+;- Region: Input Section 
+;+++++++++++++++++++++++++++++++++++++++
 ;a1 inch 1
 ;a2 inch 2
 
 a1 diskin2 "OLBass.wav", 1,0,1
+;++++++++++++++++++++++++++++++++++++++++
 
 ;aFilter moogladder2 a1, kFreq, 0.7
 
@@ -97,7 +99,7 @@ a1 diskin2 "OLBass.wav", 1,0,1
 
 aDist distort a1, kDist, gifn
 
-aDist lpf18 aDist, 600, .5, 0
+aDist lpf18 aDist, 800, .5, .2
 
 kLine linseg 0.0, 0.02, 1.0
 
@@ -116,7 +118,7 @@ aout = aout*kVol
 
 aOct OctaveDivider a1, 2, 220.00, 80.00
 
-aOct compress aOct, aOct, -6, 48, 60, 2, .02, .5, .02
+aOct compress aOct, aOct, -12, 48, 48, 2, .01, .7, .02
 
 aOct = aOct*kOct
 
@@ -124,7 +126,7 @@ aOct = aOct*kOct
 
 asig = (aOct+aFilter+aout+aDist+aClean)
 
-
+;- Region: Output Section
 
 outs asig, asig
 
