@@ -2,6 +2,7 @@
 ; Written by Jair-Rohm Parker Wells 2019
 ; The dilemma here is whether to go with the single fader Envelope Follwer here or do on that works more like the EHX pedal with two
 ; faders.
+; This is making sense now. I'll probably start working on the GUI. 
 
 
 
@@ -10,7 +11,7 @@
 form caption("BassSynth") size(600, 300), colour(58, 110, 182), pluginid("bsnt")
 
 vslider bounds(26, 12, 50, 150), channel("sfreq"), range(40.00, 800.00, 0.0, 1, 1.0) text("StartFreq") ; Frequency selector
-vslider bounds(86, 12, 50, 150), channel("efreq"), range(40.00, 10000.00, 40, 1, 1.0) text("EndFreq")
+;vslider bounds(86, 12, 50, 150), channel("efreq"), range(40.00, 10000.00, 40, 1, 1.0) text("EndFreq")
 vslider bounds(146, 12, 50, 150), channel("res"), range(0, 1, 0, 1, 0.001) text("Res")
 vslider bounds(266, 12, 50, 150), channel("dist"), range(0, 1, 0, 1, 0.001) text("Dist")
 vslider bounds(206, 12, 50, 150), channel("rate"), range(0, 1, 0, 1, 0.001) text("Rate")
@@ -90,10 +91,10 @@ gifn	ftgen	0,0, 257, 9, .5,1,270
 
 ;- Region: Input Section 
 ;+++++++++++++++++++++++++++++++++++++++
-a1 inch 1
+;a1 inch 1
 ;a2 inch 2
 
-;a1 diskin2 "OLBass.wav", 1,0,1
+a1 diskin2 "OLBass.wav", 1,0,1
 ;++++++++++++++++++++++++++++++++++++++++
 
 ;aFilter moogladder2 a1, kFreq, 0.7
@@ -114,13 +115,13 @@ aDist = aDist*kDist
 
 aClean = a1*kVol2
 
-aout EnvelopeFollower a1,ksens,katt,krel,kFreq,kres*0.95
+aout EnvelopeFollower a1,ksens,katt,krel,kFreq,kres
 
 aout = aout*kVol
 
 aOct OctaveDivider a1, 2, 220.00, 80.00
 
-aOct compress aOct, aOct, -12, 48, 48, 2, .01, .7, .02
+aOct compress aOct, aOct, -12, 48, 48, 2, .01, .5, .02
 
 aOct = aOct*kOct
 
