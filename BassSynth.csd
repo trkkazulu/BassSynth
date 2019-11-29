@@ -26,7 +26,7 @@ vslider bounds(526, 10, 50, 150), channel("gGain"), range(0, 1, 0, 1, 0.001) tex
 </CsOptions>
 <CsInstruments>
 ; Initialize the global variables. 
-ksmps = 1
+;ksmps = 4
 nchnls = 2
 0dbfs = 1
 
