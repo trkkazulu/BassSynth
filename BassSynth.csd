@@ -27,7 +27,7 @@ vslider bounds(526, 10, 50, 150), channel("gGain"), range(0, 1, 0, 1, 0.001) tex
 </CsOptions>
 <CsInstruments>
 ; Initialize the global variables. 
-;ksmps = 4
+ksmps = 4
 nchnls = 2
 0dbfs = 1
 
@@ -57,7 +57,7 @@ endop
 
 opcode	EnvelopeFollower,a,akkkkk
 	ain,ksens,katt,krel,kfreq,kres	xin	
-	setksmps	4
+	;setksmps	4
 
 	aFollow		follow2		ain, katt, krel			; AMPLITUDE FOLLOWING AUDIO SIGNAL
 	kFollow		downsamp	aFollow				; DOWNSAMPLE TO K-RATE
@@ -91,10 +91,10 @@ gifn	ftgen	0,0, 257, 9, .5,1,270
 
 ;- Region: Input Section 
 ;+++++++++++++++++++++++++++++++++++++++
-a1 inch 1
+;a1 inch 1
 ;a2 inch 2
 
-;a1 diskin2 "OLBass.wav", 1,0,1
+a1 diskin2 "OLBass.wav", 1,0,1
 ;++++++++++++++++++++++++++++++++++++++++
 
 ;aFilter moogladder2 a1, kFreq, 0.7
